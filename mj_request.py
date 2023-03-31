@@ -16,7 +16,7 @@ class MJRequest:
     def discord_login(self) -> None:
         print("Login processing...")
         self.driver.get("https://discord.com/channels/1088397804529000458/1088397805174927432")
-        time.sleep(10)
+        time.sleep(5)
         login = self.driver.find_element(By.XPATH, '//*[@id="uid_5"]')
         password = self.driver.find_element(By.XPATH, '//*[@id="uid_7"]')
         login.send_keys(DISCORD_EMAIL)
@@ -26,8 +26,8 @@ class MJRequest:
         print("Login succeeded")
 
     def close_selenium_driver(self) -> None:
+        print('Driver closing')
         self.driver.close()
-        print('Driver closed')
 
     def mj_request(self, request_text: str) -> None:
         mj_start_text = f"/imagine "
