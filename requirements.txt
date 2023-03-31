@@ -4,3 +4,7 @@ seleniumbase==4.13.18
 openai==0.27.2
 discord==2.2.2
 Pillow==9.4.0
+flask==2.2.3
+Flask-WTF==1.1.1
+WTForms==3.0.1
+

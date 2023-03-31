@@ -13,7 +13,7 @@ class MJRequest:
         self.driver = connect_driver()
         self.discord_login()
 
-    def discord_login(self):
+    def discord_login(self) -> None:
         print("Login processing...")
         self.driver.get("https://discord.com/channels/1088397804529000458/1088397805174927432")
         time.sleep(10)
@@ -25,25 +25,19 @@ class MJRequest:
         time.sleep(15)
         print("Login succeeded")
 
-    def close_selenium_driver(self):
+    def close_selenium_driver(self) -> None:
         self.driver.close()
         print('Driver closed')
 
-    def mj_request(self):
-        runnable = True
-        while runnable:
-            input_text = input("Enter text:")
-            if input_text == "0":
-                runnable = False
-            else:
-                print(f"Input: {input_text}")
-                request_text = f"/imagine {input_text}"
-                actions = ActionChains(self.driver)
-                for i in request_text:
-                    actions.send_keys(i)
-                    actions.perform()
-                    time.sleep(0.3)
+    def mj_request(self, request_text: str) -> None:
+        mj_start_text = f"/imagine "
+        actions = ActionChains(self.driver)
+        for i in mj_start_text:
+            actions.send_keys(i)
+            actions.perform()
+            time.sleep(0.3)
 
-                actions = ActionChains(self.driver)
-                actions.send_keys(Keys.ENTER)
-                actions.perform()
+        actions = ActionChains(self.driver)
+        actions.send_keys(request_text, Keys.ENTER)
+        actions.perform()
+        return
