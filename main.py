@@ -1,7 +1,7 @@
-from mj_request import MJRequest
+from renessandro.openai_api.mj_request import MJConnection
 
 if __name__ == "__main__":
-    mj_runner = MJRequest()
+    mj_runner = MJConnection()
     try:
         mj_runner.mj_request()
     finally:

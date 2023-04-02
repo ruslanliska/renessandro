@@ -1,20 +1,23 @@
 import time
+import logging
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from config import *
-from utils import connect_driver
+from renessandro.config import *
+from renessandro.utils import connect_driver
+
+logger = logging.getLogger('MJ connection')
 
 
-class MJRequest:
+class MJConnection:
     def __init__(self):
         self.driver = connect_driver()
         self.discord_login()
 
     def discord_login(self) -> None:
-        print("Login processing...")
+        logging.info("Login processing...")
         self.driver.get("https://discord.com/channels/1088397804529000458/1088397805174927432")
         time.sleep(5)
         login = self.driver.find_element(By.XPATH, '//*[@id="uid_5"]')
@@ -22,8 +25,8 @@ class MJRequest:
         login.send_keys(DISCORD_EMAIL)
         password.send_keys(DISCORD_PASSWORD)
         password.send_keys(Keys.ENTER)
-        time.sleep(15)
-        print("Login succeeded")
+        time.sleep(10)
+        logging.info("Login succeeded")
 
     def close_selenium_driver(self) -> None:
         print('Driver closing')

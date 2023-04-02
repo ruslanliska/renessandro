@@ -1,12 +1,15 @@
-from flask import Flask, jsonify, make_response, render_template, redirect, url_for
-from mj_request import MJRequest
+import logging
+
+from flask import Flask, jsonify, make_response, render_template
 from forms import MyForm
 
-from openai_request import create_mj_prompt
-
+from renessandro.openai_api.openai_request import create_mj_prompt
+from renessandro.openai_api.mj_request import MJConnection
 app = Flask(__name__)
 
-mj_runner = MJRequest()
+logger = logging.getLogger('server')
+
+mj_runner = MJConnection()
 app.config["SECRET_KEY"] = "your-secret-key-ruslan" # Replace "your-secret-key" with a secure secret key
 
 
@@ -45,14 +48,10 @@ def mj_request_default():
 def index():
     form = MyForm()
     if form.validate_on_submit():
-        count = form.name.data
         gpt_result = create_mj_prompt()
-        print(gpt_result)
-
+        logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
 
-        # Handle the form data, e.g., save to database, send an email, etc.
-        print(f"Name: {count}")
     return render_template("index.html", form=form)
 
 @app.route("/success")
@@ -66,11 +65,14 @@ def mj_home():
         gpt_result = create_mj_prompt()
 
         mj_runner.mj_request(gpt_result)
-
-        # Handle the form data, e.g., save to database, send an email, etc.
-        print(f"Name: {gpt_result}")
     return render_template("mj_home.html", form=form)
 
+
+@app.errorhandler(500)
+def pageNotFound(error):
+    return render_template("error.html"), 500
+
+app.register_error_handler(500, pageNotFound)
 
 
 def main():
@@ -81,8 +83,8 @@ def main():
         # mj_runner.close_selenium_driver()
 
     finally:
-        print("EXIT")
-        mj_runner.close_selenium_driver()
+        logger.debug("Exit program")
+        # mj_runner.close_selenium_driver()
 
 
 if __name__ == '__main__':

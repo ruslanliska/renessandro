@@ -1,4 +1,5 @@
 import time
+import logging
 
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -35,3 +36,7 @@ def slow_typing(element, text):
     for character in text:
         element.send_keys(character)
         time.sleep(0.3)
+
+
+
+
