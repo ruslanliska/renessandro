@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 from PIL import Image
 import os
-from config import DISCORD_BOT_TOKEN
+from renessandro.config import DISCORD_BOT_TOKEN
 
 
 client = commands.Bot(command_prefix="*", intents=discord.Intents.all())

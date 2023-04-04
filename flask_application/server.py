@@ -4,13 +4,14 @@ from flask import Flask, jsonify, make_response, render_template
 
 from forms import MyForm
 from renessandro.openai_api.mj_request import MJConnection
-from renessandro.openai_api.openai_request import create_mj_prompt
+from renessandro.openai_api.openai_request import ChatGPTHandler
 
 app = Flask(__name__)
 
 logger = logging.getLogger('server')
 
 mj_runner = MJConnection()
+chat_gpt = ChatGPTHandler()
 app.config["SECRET_KEY"] = "your-secret-key-ruslan"  # Replace "your-secret-key" with a secure secret key
 
 
@@ -36,7 +37,7 @@ def hello():
 
 @app.route('/api/mj/default', methods=['GET'])
 def mj_request_default():
-    gpt_mj_prompt = create_mj_prompt()
+    gpt_mj_prompt = chat_gpt.create_mj_prompt()
     mj_runner.mj_request(gpt_mj_prompt)
     response_body = {'message': 'Request to MJ sent!',
                      'Prompt': gpt_mj_prompt}
@@ -51,7 +52,7 @@ def mj_request_default():
 def index():
     form = MyForm()
     if form.validate_on_submit():
-        gpt_result = create_mj_prompt()
+        gpt_result = chat_gpt.create_mj_prompt()
         logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
 
@@ -67,7 +68,7 @@ def success():
 def mj_home():
     form = MyForm()
     if form.validate_on_submit():
-        gpt_result = create_mj_prompt()
+        gpt_result = chat_gpt.create_mj_prompt()
 
         mj_runner.mj_request(gpt_result)
     return render_template("mj_home.html", form=form)
