@@ -1,25 +1,28 @@
 import logging
 
 from flask import Flask, jsonify, make_response, render_template
-from forms import MyForm
 
-from renessandro.openai_api.openai_request import create_mj_prompt
+from forms import MyForm
 from renessandro.openai_api.mj_request import MJConnection
+from renessandro.openai_api.openai_request import create_mj_prompt
+
 app = Flask(__name__)
 
 logger = logging.getLogger('server')
 
 mj_runner = MJConnection()
-app.config["SECRET_KEY"] = "your-secret-key-ruslan" # Replace "your-secret-key" with a secure secret key
+app.config["SECRET_KEY"] = "your-secret-key-ruslan"  # Replace "your-secret-key" with a secure secret key
 
 
 @app.route("/")
 def home():
     return render_template("home.html")
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route('/api/hello', methods=['GET'])
 def hello():
@@ -54,9 +57,11 @@ def index():
 
     return render_template("index.html", form=form)
 
+
 @app.route("/success")
 def success():
     return "Form submitted successfully!"
+
 
 @app.route("/mj", methods=["GET", "POST"])
 def mj_home():
@@ -72,6 +77,7 @@ def mj_home():
 def pageNotFound(error):
     return render_template("error.html"), 500
 
+
 app.register_error_handler(500, pageNotFound)
 
 
@@ -80,14 +86,12 @@ def main():
         app.run(host='0.0.0.0', port=8080)
     except KeyboardInterrupt:
         print('Interrupted')
-        # mj_runner.close_selenium_driver()
+        mj_runner.close_selenium_driver()
 
     finally:
         logger.debug("Exit program")
-        # mj_runner.close_selenium_driver()
+        mj_runner.close_selenium_driver()
 
 
 if __name__ == '__main__':
     main()
-
-
