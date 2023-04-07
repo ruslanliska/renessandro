@@ -1,10 +1,10 @@
-<!-- templates/index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example - Flask</title>
+{% extends "base.html" %}
+
+{% block title %}
+Generate creative
+{% endblock %}
+
+{% block content %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,11 +33,12 @@
             margin-top: 1.5rem;
         }
 
-        input[type="text"], input[type="submit"] {
+        input[type="text"], input[type="number"], input[type="submit"] {
             width: 100%;
             padding: 0.5rem;
             margin-top: 0.25rem;
             box-sizing: border-box;
+            border-radius: 5px;
         }
 
         input[type="submit"] {
@@ -54,17 +55,34 @@
             background-color: #444;
         }
     </style>
-</head>
-<body>
+
     <div class="container">
-        <h1>Submit Your Information</h1>
-        <form action="" method="post">
+        <h1>Enter data for creative</h1>
+        <form action="{{ url_for('index') }}" method="post">
             {{ form.csrf_token }}
-            <label for="{{ form.name.id }}">Name:</label>
-            {{ form.name }}
-            <br>
+            <label for="{{ form.subject_1.id }}">
+                {{ form.subject_1.label.text }}<span style="color: red;">*</span>
+            </label>
+            {{ form.subject_1 }}
+            <label for="{{ form.subject_2.id }}">
+                {{ form.subject_2.label.text }}
+            </label>
+            {{ form.subject_2 }}
+            <label for="{{ form.place.id }}">
+                {{ form.place.label.text }}<span style="color: red;">*</span>
+            </label>
+            {{ form.place }}
+            <label for="{{ form.action.id }}">
+                {{ form.action.label.text }}<span style="color: red;">*</span>
+            </label>
+            {{ form.action }}
+            <label for="{{ form.quantity.id }}">
+                {{ form.quantity.label.text }}
+            </label>
+            {{ form.quantity }}
+            <hr/>
             {{ form.submit }}
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
+
