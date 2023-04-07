@@ -47,6 +47,15 @@ class ChatGPTHandler:
             logger.info('Message history cleared')
         return result_reply
 
-a = ChatGPTHandler()
+    def create_mj_prompt_custom(self, **kwargs):
+        for prime in PRIMING_LIST:
+            self.add_message(prime)
 
-print(a.create_mj_prompt_default())
+        final_message = f"Ok, now come up with a superstring and then convert it to the prompt. Write only prompt. Here is my dict: {kwargs}"
+        print(final_message)
+        self.add_message(final_message)
+        result_reply = self.chat_GPT_completion()['choices'][0]['message']['content']
+        if result_reply:
+            self.message_history.clear()
+            logger.info('Message history cleared')
+        return result_reply

@@ -58,16 +58,25 @@ Generate creative
 
     <div class="container">
         <h1>Enter data for creative</h1>
-        <form action="{{ url_for('index') }}" method="post">
+        <form action="{{ url_for('index') }}" method="POST">
             {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
             <label for="{{ form.subject_1.id }}">
                 {{ form.subject_1.label.text }}<span style="color: red;">*</span>
             </label>
             {{ form.subject_1 }}
+            <label for="{{ form.subject_1.id }}">
+                {{ form.subject_1_description.label.text }}<span style="color: red;">*</span>
+            </label>
+            {{ form.subject_1_description }}
             <label for="{{ form.subject_2.id }}">
                 {{ form.subject_2.label.text }}
             </label>
             {{ form.subject_2 }}
+            <label for="{{ form.subject_2.id }}">
+                {{ form.subject_2_description.label.text }}
+            </label>
+            {{ form.subject_2_description }}
             <label for="{{ form.place.id }}">
                 {{ form.place.label.text }}<span style="color: red;">*</span>
             </label>
@@ -81,7 +90,7 @@ Generate creative
             </label>
             {{ form.quantity }}
             <hr/>
-            {{ form.submit }}
+            {{ form.submit() }}
         </form>
     </div>
 {% endblock %}

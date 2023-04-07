@@ -51,8 +51,20 @@ def mj_request_default():
 @app.route("/mj/request", methods=["GET", "POST"])
 def index():
     form = CustomRequestForm()
+    subject_1 = form.subject_1.data
+    subject_1_description = form.subject_1_description.data
+    subject_2 = form.subject_2.data
+    subject_2_description = form.subject_2_description.data
+    place = form.place.data
+    action = form.action.data
+    quantity = form.quantity.data
     if form.validate_on_submit():
-        gpt_result = chat_gpt.create_mj_prompt()
+        gpt_result = chat_gpt.create_mj_prompt_custom(subject_1=subject_1,
+                                                      subject_1_description=subject_1_description,
+                                                      subject_2=subject_2,
+                                                      subject_2_description=subject_2_description,
+                                                      place=place,
+                                                      action=action,)
         logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
 
