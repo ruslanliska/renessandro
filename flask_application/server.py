@@ -2,7 +2,7 @@ import logging
 
 from flask import Flask, jsonify, make_response, render_template
 
-from forms import MyForm
+from forms import CustomRequestForm
 from renessandro.openai_api.mj_request import MJConnection
 from renessandro.openai_api.openai_request import ChatGPTHandler
 
@@ -37,7 +37,7 @@ def hello():
 
 @app.route('/api/mj/default', methods=['GET'])
 def mj_request_default():
-    gpt_mj_prompt = chat_gpt.create_mj_prompt()
+    gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
     mj_runner.mj_request(gpt_mj_prompt)
     response_body = {'message': 'Request to MJ sent!',
                      'Prompt': gpt_mj_prompt}
@@ -50,7 +50,7 @@ def mj_request_default():
 
 @app.route("/mj/request", methods=["GET", "POST"])
 def index():
-    form = MyForm()
+    form = CustomRequestForm()
     if form.validate_on_submit():
         gpt_result = chat_gpt.create_mj_prompt()
         logger.info(f"Request prompt: {gpt_result}")
@@ -66,7 +66,7 @@ def success():
 
 @app.route("/mj", methods=["GET", "POST"])
 def mj_home():
-    form = MyForm()
+    form = CustomRequestForm()
     if form.validate_on_submit():
         gpt_result = chat_gpt.create_mj_prompt()
 

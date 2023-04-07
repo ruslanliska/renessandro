@@ -25,17 +25,8 @@ My keys:
 Do you understand?
 """
 
-priming_4 = """
-Don't add new strings to this dictionary, use only this strings
-
-picture = {
-  "subject_men": ["a billionaire", "a fake billionaire", "werwolf", "a man dragon", "drug dealer", "bad boy", "twins", "prince", "cowboy", "professor"],
-  "subject_men_describe": ["in good shape", "muscular", "sporty and attractive", "cute", "old", "very young"],
-  "subject_women": ["surrogate mother", "assistant female", "wife", "mistress", "princes", "poor young women", "virgin", "student female"],
-  "subject_women_describe": ["with kiss marks on the neck", "girl in mini dress", "in wedding Dress", "with a pregnancy test in her hand", "pregnant with big opened belly", "very big waist", "girl with lowered strap of the bra"],
-  "connection": ["he kisses her", "he hugs her", "he holds her in his arms", "he push her against the wall", "he marry her", "he hugs her from behind", "one night stand"],
-  "background": ["a bedroom with a large bed", "luxury penthouse", "luxury villa", "sports car", "island", "yacht", "shower", "bath", "altar for marriage", "office", "dark forest", "dungeon"]
-}
+priming_4 = f"""
+Don't add new strings to this dictionary, use only values from dictionary I will send you
 """
 
 priming_5 = """
@@ -176,7 +167,7 @@ priming_13 = """
 
 2) In a futuristic cityscape, a muscular cowboy in good shape holding a surrogate mother with a pregnancy test in her hand. They are standing on the rooftop of a skyscraper, with the cityscape as the background. The cowboy's rugged and weathered face bears a look of fierce determination and protectiveness, while the surrogate mother gazes up at him with a mixture of love and gratitude. The scene is captured in stunning detail using a 3D 32-bit isometric anime style, emphasizing the futuristic elements of the cityscape. The cowboy is wearing a black leather jacket, denim jeans, and a cowboy hat, while the surrogate mother is dressed in a white summer dress. The composition is skillfully captured to highlight the raw passion and intimacy between the two subjects, with the cityscape providing a dramatic and romantic backdrop.
 
-3) In a pixel art style, a werewolf in good shape is holding his surrogate mother in his arms, while they stand on an island with a dark forest in the background. The werewolf is depicted as a humanoid wolf with muscular arms and sharp claws, while the surrogate mother is wearing a summer dress and has a pregnancy test in her hand. The pixel art is done in a retro 8-bit style, with vibrant colors and a detailed pixelated landscape. The scene is captured using a virtual camera, with an isometric perspective to enhance the depth and dimensionality of the image. Style of the picture is stained glass window portrait — upbeta — v 4 
+3) In a pixel art style, a werewolf in good shape is holding his surrogate mother in his arms, while they stand on an island with a dark forest in the background. The werewolf is depicted as a humanoid wolf with muscular arms and sharp claws, while the surrogate mother is wearing a summer dress and has a pregnancy test in her hand. The pixel art is done in a retro 8-bit style, with vibrant colors and a detailed pixelated landscape. The scene is captured using a virtual camera, with an isometric perspective to enhance the depth and dimensionality of the image. Style of the picture is stained glass window portrait — upbeta 
 
 4) A muscular drug dealer with a scar on his cheek holding his assistant female against the wall in a luxury villa. His gaze is intense, and he kisses her passionately, while she has kiss marks on her neck. The setting is captured with a Canon EOS 5D Mark IV DSLR camera, using an EF 50mm f/1.8 STM lens, with a resolution of 30.4 megapixels, an ISO sensitivity of 800, and a shutter speed of 1/125 sec. The composition showcases the raw, dangerous power of the drug dealer against the opulent backdrop of the villa, creating a thrilling and sensual atmosphere. --ar 3:2 --q 1.5
 """
@@ -189,17 +180,9 @@ priming_15 = """
 Don't write anything else except the prompt!. Don't write prompts larger than 450 letters. Print OK
 """
 
-priming_16 = """
-Ok, now come up with a superstring and then convert it to the prompt. Write only prompt.
-picture = {
-  "subject_men": ["a billionaire", "a fake billionaire", "werwolf", "a man dragon", "drug dealer", "bad boy", "twins", "prince", "cowboy", "professor"],
-  "subject_men_describe": ["in good shape", "muscular", "sporty and attractive", "cute", "old", "very young"],
-  "subject_women": ["surrogate mother", "assistant female", "wife", "mistress", "princes", "poor young women", "virgin", "student female"],
-  "subject_women_describe": ["with kiss marks on the neck", "girl in mini dress", "in wedding Dress", "with a pregnancy test in her hand", "pregnant with big opened belly", "very big waist", "girl with lowered strap of the bra"],
-  "connection": ["he kisses her", "he hugs her", "he holds her in his arms", "he push her against the wall", "he marry her", "he hugs her from behind", "one night stand"],
-  "background": ["a bedroom with a large bed", "luxury penthouse", "luxury villa", "sports car", "island", "yacht", "shower", "bath", "altar for marriage", "office", "dark forest", "dungeon"]
-}
-"""
+# priming_16 = """
+# Ok, now come up with a superstring and then convert it to the prompt. Write only prompt. Here is my dict:
+# """
 
 PRIMING_LIST = [priming_1, priming_2, priming_3, priming_4, priming_5, priming_6, priming_7, priming_8, priming_9,
-                priming_10, priming_11, priming_12, priming_13, priming_14, priming_15, priming_16]
+                priming_10, priming_11, priming_12, priming_13, priming_14, priming_15]
