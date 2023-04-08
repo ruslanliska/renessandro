@@ -1,80 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - My Flask App</title>
-    <style>
-        /* Add your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+{% extends "base.html" %}
 
-        header {
-            background-color: #333;
-            padding: 1rem;
-        }
+{% block title %}
+About
+{% endblock %}
+{% block content %}
+<style>
+        h1 {
+        color: #F0FFFF;
+        font-size: 3rem;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
+    p {
+        color: #F0F8FF;
+        font-size: 1.0rem;
+        line-height: 1.5;
+        margin: 1rem 0;
+        text-align: center;
+    }
+</style>
 
-        nav ul li {
-            display: inline;
-            margin-right: 1rem;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            padding: 2rem;
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        p {
-            color: #666;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="about">
             <h1>About My Flask App</h1>
             <p>
                 My Flask App is a web application built using the Flask framework. Our app aims to provide a seamless and user-friendly experience, offering various features and functionalities that cater to a wide range of user needs.
             </p>
-        </section>
 
         <section id="team">
             <h2>Our Team</h2>
@@ -90,9 +41,5 @@
             </p>
         </section>
     </main>
+{% endblock %}
 
-    <footer>
-        <p>&copy; 2023 My Flask App. All rights reserved.</p>
-    </footer>
-</body>
-</html>

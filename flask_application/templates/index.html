@@ -5,6 +5,50 @@ Generate creative
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <h1>Enter data for creative</h1>
+    <form action="{{ url_for('index') }}" method="POST">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <label for="{{ form.subject_1.id }}">
+            {{ form.subject_1.label.text }}<span style="color: red;">*</span>
+        </label>
+        {{ form.subject_1 }}
+        <label for="{{ form.subject_1.id }}">
+            {{ form.subject_1_description.label.text }}<span style="color: red;">*</span>
+        </label>
+        {{ form.subject_1_description }}
+        <label for="{{ form.subject_2.id }}">
+            {{ form.subject_2.label.text }}
+        </label>
+        {{ form.subject_2 }}
+        <label for="{{ form.subject_2.id }}">
+            {{ form.subject_2_description.label.text }}
+        </label>
+        {{ form.subject_2_description }}
+        <label for="{{ form.place.id }}">
+            {{ form.place.label.text }}<span style="color: red;">*</span>
+        </label>
+        {{ form.place }}
+        <label for="{{ form.action.id }}">
+            {{ form.action.label.text }}<span style="color: red;">*</span>
+        </label>
+        {{ form.action }}
+        <label for="{{ form.quantity.id }}">
+            {{ form.quantity.label.text }}
+        </label>
+        {{ form.quantity }}
+        </div>
+        <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
+            <div class="btn-group">
+                {{ form.submit() }}
+
+            </div>
+        </div>
+        <br>
+    </form>
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +58,7 @@ Generate creative
         }
 
         .container {
-            max-width: 600px;
+            max-width: 95%;
             margin: 2rem auto;
             padding: 1rem;
             text-align: center;
@@ -24,74 +68,42 @@ Generate creative
 
         h1 {
             color: #333;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 100%;
         }
 
         label {
             display: block;
             font-weight: bold;
-            margin-top: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 80%;
         }
 
-        input[type="text"], input[type="number"], input[type="submit"] {
-            width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.25rem;
+        input[type="text"], input[type="number"]{
+            width: 90%;
+            padding: 0.2rem;
+            margin-top: 0.15rem;
             box-sizing: border-box;
             border-radius: 5px;
         }
 
         input[type="submit"] {
+            text-align:center;
             display: block;
-            margin-top: 1.5rem;
-            background-color: #333;
+            margin-top: 1.0rem;
+            background: rgba(0,0,0,0.15);
             color: #fff;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
+            padding: 10px 25px;
+            border: 1px solid #FFCB39;
+            border-radius: 100px;
+            font-weight: 400;
+            width:170px;
         }
 
         input[type="submit"]:hover {
             background-color: #444;
         }
     </style>
-
-    <div class="container">
-        <h1>Enter data for creative</h1>
-        <form action="{{ url_for('index') }}" method="POST">
-            {{ form.csrf_token }}
-            {{ form.hidden_tag() }}
-            <label for="{{ form.subject_1.id }}">
-                {{ form.subject_1.label.text }}<span style="color: red;">*</span>
-            </label>
-            {{ form.subject_1 }}
-            <label for="{{ form.subject_1.id }}">
-                {{ form.subject_1_description.label.text }}<span style="color: red;">*</span>
-            </label>
-            {{ form.subject_1_description }}
-            <label for="{{ form.subject_2.id }}">
-                {{ form.subject_2.label.text }}
-            </label>
-            {{ form.subject_2 }}
-            <label for="{{ form.subject_2.id }}">
-                {{ form.subject_2_description.label.text }}
-            </label>
-            {{ form.subject_2_description }}
-            <label for="{{ form.place.id }}">
-                {{ form.place.label.text }}<span style="color: red;">*</span>
-            </label>
-            {{ form.place }}
-            <label for="{{ form.action.id }}">
-                {{ form.action.label.text }}<span style="color: red;">*</span>
-            </label>
-            {{ form.action }}
-            <label for="{{ form.quantity.id }}">
-                {{ form.quantity.label.text }}
-            </label>
-            {{ form.quantity }}
-            <hr/>
-            {{ form.submit() }}
-        </form>
-    </div>
 {% endblock %}
 

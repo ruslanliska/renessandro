@@ -1,10 +1,11 @@
 import logging
 
 from flask import Flask, jsonify, make_response, render_template
-
+from flask import json
 from forms import CustomRequestForm
 from renessandro.openai_api.mj_request import MJConnection
 from renessandro.openai_api.openai_request import ChatGPTHandler
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 
@@ -64,7 +65,7 @@ def index():
                                                       subject_2=subject_2,
                                                       subject_2_description=subject_2_description,
                                                       place=place,
-                                                      action=action,)
+                                                      action=action, )
         logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
 
@@ -76,22 +77,34 @@ def success():
     return "Form submitted successfully!"
 
 
-@app.route("/mj", methods=["GET", "POST"])
-def mj_home():
-    form = CustomRequestForm()
-    if form.validate_on_submit():
-        gpt_result = chat_gpt.create_mj_prompt()
-
-        mj_runner.mj_request(gpt_result)
-    return render_template("mj_home.html", form=form)
-
-
 @app.errorhandler(500)
-def pageNotFound(error):
-    return render_template("error.html"), 500
+def pageNotFound(e):
+    response = e.get_response()
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    logging.error(response.data)
+    return render_template("500_error.html"), 500
 
 
 app.register_error_handler(500, pageNotFound)
+
+
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    response = e.get_response()
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    logging.error(response.data)
+    return render_template("error.html")
 
 
 def main():
