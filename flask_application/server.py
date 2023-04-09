@@ -1,11 +1,13 @@
 import logging
+import uuid
 
-from flask import Flask, jsonify, make_response, render_template
+from flask import Flask, jsonify, make_response, render_template, redirect, url_for
 from flask import json
 from forms import CustomRequestForm
 from renessandro.openai_api.mj_request import MJConnection
 from renessandro.openai_api.openai_request import ChatGPTHandler
 from werkzeug.exceptions import HTTPException
+
 
 app = Flask(__name__)
 
@@ -60,6 +62,7 @@ def index():
     action = form.action.data
     quantity = form.quantity.data
     if form.validate_on_submit():
+        random_id = uuid.uuid4()
         gpt_result = chat_gpt.create_mj_prompt_custom(subject_1=subject_1,
                                                       subject_1_description=subject_1_description,
                                                       subject_2=subject_2,
@@ -68,6 +71,7 @@ def index():
                                                       action=action, )
         logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
+        return redirect(url_for('success'))
 
     return render_template("index.html", form=form)
 
