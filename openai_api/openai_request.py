@@ -35,6 +35,8 @@ class ChatGPTHandler:
         pass
 
     def create_mj_prompt_default(self, niche=None):
+        self.message_history.clear()
+        logger.info('Message history cleared 2')
         for prime in PRIMING_LIST:
             self.add_message(prime)
 
