@@ -1,3 +1,5 @@
+import logging
+
 import discord
 from discord.ext import commands
 import requests
@@ -45,7 +47,7 @@ async def download_image(url, filename):
 
         with open(f"{directory}/{input_folder}/{filename}", "wb") as f:
             f.write(response.content)
-        print(f"Image downloaded: {filename}")
+        logging.info(f"Image downloaded: {filename}")
 
         input_file = os.path.join(input_folder, filename)
 
@@ -67,7 +69,7 @@ async def download_image(url, filename):
 
 @client.event
 async def on_ready():
-    print("Bot connected")
+    logging.info("Bot connected")
 
 
 @client.event
