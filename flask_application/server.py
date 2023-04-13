@@ -38,7 +38,7 @@ def hello():
     return response
 
 
-@app.route('/api/mj/default', methods=['GET'])
+@app.route('/creative/default', methods=['GET'])
 def mj_request_default():
     gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
     mj_runner.mj_request(gpt_mj_prompt)
@@ -48,11 +48,11 @@ def mj_request_default():
     response_headers = {'Content-Type': 'application/json'}
     response = make_response(jsonify(response_body), status_code)
     response.headers = response_headers
-    return response
+    return render_template('success_page.html')
 
 
-@app.route("/mj/request", methods=["GET", "POST"])
-def index():
+@app.route("/creative/custom", methods=["GET", "POST"])
+def custom_creative():
     form = CustomRequestForm()
     subject_1 = form.subject_1.data
     subject_1_description = form.subject_1_description.data
@@ -74,6 +74,11 @@ def index():
         return redirect(url_for('success'))
 
     return render_template("index.html", form=form)
+
+
+@app.route('/creative', methods=['GET'])
+def creative_demo():
+    return render_template("demo_page.html")
 
 
 @app.route("/success")

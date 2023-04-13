@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<style>
+  .card {
+      display: inline-block;
+      width: 400px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      border-radius: 5px;
+      background-color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #333;
+  }
+
+  .card img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+  .card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+  }
+
+  .card p {
+      margin-bottom: 0;
+      line-height: 1.5;
+  }
+</style>
+<div class="container">
+  <div class="card">
+      <img src="https://thumbs.dreamstime.com/b/industrial-robotic-arm-linear-icon-vector-illustration-flat-design-167594733.jpg" alt="Card 1">
+      <h2>Custom</h2>
+      <p>Renesandro creates new ads based on data about the most effective ads of top competitors at Sensor Tower and Facebook Ads Library. You can upload your own data in JSON format.</p>
+      <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
+        <div class="btn-group">
+            <ul style="padding-left:0%">
+               <li><a href="/creative/custom" class="btn-request mt-4" style="font-size:20px; background: #ffcb39; color:black">Try it!</a></li>
+            </ul>
+        </div>
+      </div>
+  </div>
+  <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Mini-Robot.png" alt="Card 2">
+      <h2>Default</h2>
+      <p>You can upload a specific advertising concept to Renesandro and it will generate different variations of the concept with unique elements and styles.</p>
+      <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
+        <div class="btn-group">
+            <ul style="padding-left:0%">
+               <li><a href="/creative/default" class="btn-request mt-4" style="font-size:20px; background: #ffcb39; color:black">Try it!</a></li>
+            </ul>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+
