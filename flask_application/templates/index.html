@@ -7,7 +7,7 @@ Generate creative
 {% block content %}
 <div class="container">
     <h1>Enter data for creative</h1>
-    <form action="{{ url_for('index') }}" method="POST">
+    <form action="{{ url_for('custom_creative') }}" method="POST">
         {{ form.csrf_token }}
         {{ form.hidden_tag() }}
         <label for="{{ form.subject_1.id }}">
