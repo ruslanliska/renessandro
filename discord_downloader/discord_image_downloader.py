@@ -1,4 +1,5 @@
 import logging
+import shutil
 
 import discord
 from discord.ext import commands
@@ -7,7 +8,7 @@ from dotenv import load_dotenv
 from PIL import Image
 import os
 from renessandro.config import DISCORD_BOT_TOKEN
-
+from google_drive_uploader import upload_creatives_to_drive
 
 client = commands.Bot(command_prefix="*", intents=discord.Intents.all())
 
@@ -82,5 +83,9 @@ async def on_message(message):
         if attachment.filename.lower().endswith((".png", ".jpg", ".jpeg", ".gif")):
             await download_image(attachment.url, f"{file_prefix}{attachment.filename}")
 
-
+        try:
+            print("on message")
+            upload_creatives_to_drive(f"{directory}/output")
+        except FileNotFoundError:
+            logging.error("File not found handling")
 client.run(DISCORD_BOT_TOKEN)

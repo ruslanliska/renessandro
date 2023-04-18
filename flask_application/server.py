@@ -71,7 +71,7 @@ def custom_creative():
                                                       action=action, )
         logger.info(f"Request prompt: {gpt_result}")
         mj_runner.mj_request(gpt_result)
-        return redirect(url_for('success'))
+        return render_template('success_page.html')
 
     return render_template("index.html", form=form)
 

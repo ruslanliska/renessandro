@@ -30,8 +30,7 @@ class MJConnection:
 
     def close_selenium_driver(self) -> None:
         print('Driver closing')
-        # self.driver.close()
-        self.driver.quit()
+        self.driver.close()
 
     def mj_request(self, request_text: str) -> None:
         mj_start_text = f"/imagine "
@@ -44,6 +43,6 @@ class MJConnection:
         actions = ActionChains(self.driver)
         #TODO
         mj_parameters = None
-        actions.send_keys(request_text, Keys.ENTER)
+        actions.send_keys(request_text + " The scene is captured with an ultra-realistic photography. The aperture is set to f/3, ISO 200, and a shutter speed of 1/100 sec, balancing the natural light and shadows to create an intense and romantic atmosphere. --q 2 --ar 1:1 --v 5", Keys.ENTER)
         actions.perform()
         return
