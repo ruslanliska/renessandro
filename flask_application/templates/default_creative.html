@@ -5,48 +5,43 @@ Generate creative
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
-    <h1>Enter data for creative</h1>
-    <form action="{{ url_for('custom_creative') }}" method="POST">
+    <h1 style="font-size: 35px">Please, provide the file with picture data</h1>
+    <form action="{{ url_for('mj_request_default') }}" method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
         {{ form.hidden_tag() }}
-        <label for="{{ form.subject_1.id }}">
-            {{ form.subject_1.label.text }}<span style="color: red;">*</span>
-        </label>
-        {{ form.subject_1 }}
-        <label for="{{ form.subject_1.id }}">
-            {{ form.subject_1_description.label.text }}<span style="color: red;">*</span>
-        </label>
-        {{ form.subject_1_description }}
-        <label for="{{ form.subject_2.id }}">
-            {{ form.subject_2.label.text }}
-        </label>
-        {{ form.subject_2 }}
-        <label for="{{ form.subject_2.id }}">
-            {{ form.subject_2_description.label.text }}
-        </label>
-        {{ form.subject_2_description }}
-        <label for="{{ form.place.id }}">
-            {{ form.place.label.text }}<span style="color: red;">*</span>
-        </label>
-        {{ form.place }}
-        <label for="{{ form.action.id }}">
-            {{ form.action.label.text }}<span style="color: red;">*</span>
-        </label>
-        {{ form.action }}
-<!--        <label for="{{ form.quantity.id }}">-->
-<!--            {{ form.quantity.label.text }}-->
-<!--        </label>-->
-<!--        {{ form.quantity }}-->
-        </div>
-        <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
-            <div class="btn-group">
-                {{ form.submit() }}
 
-            </div>
+        <div style="text-align: center;"> <!-- Add a container div with center-aligned text -->
+            <style>
+                /* Style for the text (adjust the font-size as needed) */
+                .larger-text {
+                    font-size: 20px; /* Adjust the font size as desired */
+                }
+
+                /* Style for the file upload button (adjust the padding and font-size as needed) */
+                .larger-button {
+                    padding: 10px 20px; /* Adjust the padding as desired */
+                    font-size: 18px; /* Adjust the font size as desired */
+                }
+            </style>
+            <br>
+            {{ form.picture_data_file(class="larger-button") }}
         </div>
-        <br>
+
+    <br>
+    <br>
+    <br>
+</div>
+    <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
+        <div class="btn-group">
+
+            {{ form.submit() }}
+        </div>
+    </div>
     </form>
+
+
 
 
     <style>
