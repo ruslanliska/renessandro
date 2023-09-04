@@ -10,7 +10,7 @@ from langchain.prompts.chat import (
 )
 
 from renessandro.config import OPENAI_KEY
-from renessandro.openai_api.picture_data import picture
+from renessandro.openai_api.picture_data import read_json_file
 
 logger = logging.getLogger('server.openai_request')
 openai.api_key = OPENAI_KEY
@@ -144,6 +144,7 @@ class ChatGPTHandler:
             custom_data = generate_image_data('custom', subject_1='...', action='...', place='...')
             default_data = generate_image_data('default')
         """
+        picture = read_json_file('../image_data/data.json')
         if image_data_type == 'custom':
             return {
                 'subject_1': kwargs.get('subject_1'),
@@ -166,6 +167,3 @@ class ChatGPTHandler:
             }
         else:
             raise AttributeError('Image data type must be default or custom.')
-
-a = ChatGPTHandler()
-print(a.create_mj_prompt_default())
