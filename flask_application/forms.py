@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import StringField, SubmitField, IntegerField, FileField
 from wtforms.validators import DataRequired
 
 
@@ -13,3 +14,9 @@ class CustomRequestForm(FlaskForm):
     quantity = IntegerField("How much creatives do you want? (Divided by 4)", default=4)
     submit = SubmitField("Submit")
 
+
+class DefaultRequestForm(FlaskForm):
+    picture_data_file = FileField("File with image data",
+                                  validators=[FileRequired(),
+                                              FileAllowed(['json'], 'Only JSON file is allowed.')])
+    submit = SubmitField("Submit")
