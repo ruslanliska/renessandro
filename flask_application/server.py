@@ -1,4 +1,5 @@
 import logging
+import time
 import uuid
 
 from flask import Flask, jsonify, make_response, render_template, redirect, url_for
@@ -15,7 +16,6 @@ logger = logging.getLogger('server')
 
 mj_runner = MJConnection()
 chat_gpt = ChatGPTHandler()
-app.config["SECRET_KEY"] = "your-secret-key-ruslan"  # Replace "your-secret-key" with a secure secret key
 
 
 @app.route("/")
@@ -40,8 +40,11 @@ def hello():
 
 @app.route('/creative/default', methods=['GET'])
 def mj_request_default():
-    gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
-    mj_runner.mj_request(gpt_mj_prompt)
+    for _ in range(100):
+        time.sleep(5)
+        gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
+        mj_runner.mj_request(gpt_mj_prompt)
+
     response_body = {'message': 'Request to MJ sent!',
                      'Prompt': gpt_mj_prompt}
     status_code = 200
