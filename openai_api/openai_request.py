@@ -81,15 +81,7 @@ class ChatGPTHandler:
             default_prompt = create_mj_prompt_default()
             response = llm(default_prompt.to_messages()).content.replace("\n", "")
         """
-        chat_prompt_with_values = self.chat_prompt.format_prompt(subject_1=random.choice(picture.get('subject_1')),
-                                                                 subject_1_description=random.choice(
-                                                                     picture.get('subject_1_description')),
-                                                                 subject_2=random.choice(picture.get('subject_2')),
-                                                                 subject_2_description=random.choice(
-                                                                     picture.get('subject_2_description')),
-                                                                 action=random.choice(picture.get('action')),
-                                                                 place=random.choice(picture.get('place')),
-                                                                 )
+        chat_prompt_with_values = self.chat_prompt.format_prompt(**self.generate_image_data(image_data_type='default',))
         response = self.llm(chat_prompt_with_values.to_messages()).content.replace("\n", "")
         return response
 
@@ -174,3 +166,6 @@ class ChatGPTHandler:
             }
         else:
             raise AttributeError('Image data type must be default or custom.')
+
+a = ChatGPTHandler()
+print(a.create_mj_prompt_default())
