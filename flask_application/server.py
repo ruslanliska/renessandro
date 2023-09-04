@@ -8,6 +8,7 @@ from forms import CustomRequestForm
 from renessandro.openai_api.mj_request import MJConnection
 from renessandro.openai_api.openai_request import ChatGPTHandler
 from werkzeug.exceptions import HTTPException
+from renessandro.config import FLASK_SECRET_KEY
 
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ logger = logging.getLogger('server')
 
 mj_runner = MJConnection()
 chat_gpt = ChatGPTHandler()
+app.config["SECRET_KEY"] = FLASK_SECRET_KEY
 
 
 @app.route("/")
@@ -40,13 +42,13 @@ def hello():
 
 @app.route('/creative/default', methods=['GET'])
 def mj_request_default():
-    for _ in range(100):
+    for _ in range(10):
         time.sleep(5)
         gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
         mj_runner.mj_request(gpt_mj_prompt)
 
     response_body = {'message': 'Request to MJ sent!',
-                     'Prompt': gpt_mj_prompt}
+                     'Prompt': 100}
     status_code = 200
     response_headers = {'Content-Type': 'application/json'}
     response = make_response(jsonify(response_body), status_code)
