@@ -1,12 +1,15 @@
 import logging
 import time
 import uuid
+import os
 
 from flask import Flask, jsonify, make_response, render_template, redirect, url_for
 from flask import json
-from forms import CustomRequestForm
-from renessandro.openai_api.mj_request import MJConnection
-from renessandro.openai_api.openai_request import ChatGPTHandler
+from forms import CustomRequestForm, DefaultRequestForm
+from werkzeug.utils import secure_filename
+
+from renessandro.openai_api import MJConnection
+from renessandro.openai_api import ChatGPTHandler
 from werkzeug.exceptions import HTTPException
 from renessandro.config import FLASK_SECRET_KEY
 
@@ -40,21 +43,33 @@ def hello():
     return response
 
 
-@app.route('/creative/default', methods=['GET'])
+@app.route('/creative/default', methods=["GET", "POST"])
 def mj_request_default():
-    for _ in range(10):
-        time.sleep(5)
-        gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
-        mj_runner.mj_request(gpt_mj_prompt)
+    form = DefaultRequestForm()
+    if form.validate_on_submit():
+        file = form.picture_data_file.data
+        filename = secure_filename('data.json')
+        picture_data_path = "../image_data/"
 
-    response_body = {'message': 'Request to MJ sent!',
-                     'Prompt': 100}
-    status_code = 200
-    response_headers = {'Content-Type': 'application/json'}
-    response = make_response(jsonify(response_body), status_code)
-    response.headers = response_headers
-    return render_template('success_page.html')
+        if not os.path.exists(picture_data_path):
+            # Create a new directory because it does not exist
+            os.makedirs(picture_data_path)
+            print("The new directory is created!")
+        file.save(os.path.join(picture_data_path, filename))
 
+        for _ in range(10):
+            time.sleep(5)
+            gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
+            mj_runner.mj_request(gpt_mj_prompt)
+
+        response_body = {'message': 'Request to MJ sent!',
+                         'Prompt': 100}
+        status_code = 200
+        response_headers = {'Content-Type': 'application/json'}
+        response = make_response(jsonify(response_body), status_code)
+        response.headers = response_headers
+        return render_template('success_page.html')
+    return render_template("default_creative.html", form=form)
 
 @app.route("/creative/custom", methods=["GET", "POST"])
 def custom_creative():
@@ -78,7 +93,7 @@ def custom_creative():
         mj_runner.mj_request(gpt_result)
         return render_template('success_page.html')
 
-    return render_template("index.html", form=form)
+    return render_template("custom_creative.html", form=form)
 
 
 @app.route('/creative', methods=['GET'])
