@@ -15,7 +15,7 @@ def connect_driver():
     Chrome Webdriver
     """
     options = Options()
-    # options.add_argument("--headless")  # Runs Chrome in headless mode.
+    options.add_argument("--headless")  # Runs Chrome in headless mode.
     options.add_argument('--no-sandbox')  # Bypass OS security model
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('ignore-certificate-errors')
