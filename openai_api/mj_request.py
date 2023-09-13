@@ -31,6 +31,7 @@ class MJConnection:
     def close_selenium_driver(self) -> None:
         print('Driver closing')
         self.driver.close()
+        self.driver.quit()
 
     def mj_request(self, request_text: str) -> None:
         mj_start_text = f"/imagine "
