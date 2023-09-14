@@ -11,6 +11,12 @@ Home
         background-color: #f8f8f8;
     }
 
+    .image-row img {
+            width: 15%; /* Adjust the width as needed */
+            max-width: 60%; /* Set a maximum width if desired */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 0px; /* Adjust the spacing between images */
+        }
 
     h1 {
         color: #F0FFFF;
@@ -90,11 +96,21 @@ Home
     <h1 class="animate-charcter">Welcome to the Renesandro App!</h1>
     <p>You can explore the various features and functionalities of our app by navigating through the different pages and
         sections.</p>
+<!--    <video width="250px" height="250px" controls="controls" x-webkit-airplay="allow" style="padding:50px;border:1px">-->
+<!--        <source src="/main/promo_video.mp4" type="video/mp4"/>-->
+<!--    </video>-->
+    <div class="image-row">
+        <img src="main/promo_video.gif">
+        <img src="main/promo_video.gif">
+        <img src="main/promo_video.gif">
+        <img src="main/promo_video.gif">
+        <img src="main/promo_video.gif">
+    </div>
     <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="About Toolbar">
-        <div class="btn-group">
+        <div class="btn-group m-4">
             <ul style="padding-left:0%">
-               <li><a href="/about" class="btn-request" style="font-size:20px">About</a></li>
-                <li><a href="/creative" class="btn-request" style="font-size:20px">Demo</a></li>
+               <li><a href="https://www.renesandro.info/" class="btn-request" style="font-size:20px">About</a></li>
+                <li><a href="/creative" class="btn-request" style="font-size:20px">Generate</a></li>
             </ul>
         </div>
     </div>
