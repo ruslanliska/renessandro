@@ -3,9 +3,9 @@ import time
 import uuid
 import os
 
-from flask import Flask, jsonify, make_response, render_template, redirect, url_for
+from flask import Flask, jsonify, make_response, render_template
 from flask import json
-from forms import CustomRequestForm, DefaultRequestForm
+from flask_application.app.forms import CustomRequestForm, DefaultRequestForm
 from werkzeug.utils import secure_filename
 
 from renessandro.openai_api import MJConnection
@@ -14,7 +14,11 @@ from werkzeug.exceptions import HTTPException
 from renessandro.config import FLASK_SECRET_KEY
 
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='static',
+            template_folder='templates'
+            )
 
 logger = logging.getLogger('server')
 
@@ -49,7 +53,7 @@ def mj_request_default():
     if form.validate_on_submit():
         file = form.picture_data_file.data
         filename = secure_filename('data.json')
-        picture_data_path = "../image_data/"
+        picture_data_path = "../../image_data/"
 
         if not os.path.exists(picture_data_path):
             # Create a new directory because it does not exist
