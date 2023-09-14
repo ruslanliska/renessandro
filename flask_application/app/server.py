@@ -57,7 +57,7 @@ def mj_request_default():
             print("The new directory is created!")
         file.save(os.path.join(picture_data_path, filename))
 
-        for _ in range(10):
+        for _ in range(100):
             time.sleep(5)
             gpt_mj_prompt = chat_gpt.create_mj_prompt_default()
             mj_runner.mj_request(gpt_mj_prompt)
